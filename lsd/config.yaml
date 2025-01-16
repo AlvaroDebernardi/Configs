@@ -1,0 +1,13 @@
+color:
+  theme: custom
+
+icons:
+  theme: fancy
+
+date: '+%d %b %y'
+
+permission: octal
+
+truncate-owner: 
+  after: 3
+  marker: ""

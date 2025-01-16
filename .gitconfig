@@ -1,0 +1,9 @@
+[user]
+	name = Alvaro Debernardi
+	email = alvarodebernardi1@gmail.com
+[core]
+	editor = nvim
+[alias]
+    pl = log --graph --pretty=format:'%C(red)%H%n \t %C(green)%an %C(blue)%d%n\t%C(yellow)%s%C(reset)%n' --decorate --all
+[init]
+	defaultBranch = main
