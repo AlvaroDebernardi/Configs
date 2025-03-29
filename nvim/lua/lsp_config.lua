@@ -6,7 +6,8 @@ require("mason").setup()
 
 require("mason-lspconfig").setup {
     --
-    ensure_installed = { "lua_ls", "texlab", "clangd", "jdtls","bashls","pyright","asm_lsp","hls"},
+    ensure_installed = { 
+        "lua_ls", "texlab", "clangd", "jdtls","bashls","pyright","asm_lsp","hls","ruby_lsp"},
 }
 
 -- Servers Configuration
@@ -84,6 +85,11 @@ lsp.bashls.setup({
     bashIde = {
         globPattern = "*@(.sh|.inc|.bash|.command)"
     }
+})
+
+lsp.ruby_lsp.setup({
+    on_attach = on_attach,
+    capabilities = capabilities
 })
 
 lsp.lua_ls.setup{

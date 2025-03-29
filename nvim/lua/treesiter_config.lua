@@ -12,7 +12,8 @@ require('nvim-treesitter.configs').setup({
          "javascript",
          "css",
          "html",
-         "markdown"
+         "markdown",
+         "ruby"
      },
 
      sync_install = false,
