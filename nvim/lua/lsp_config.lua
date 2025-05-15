@@ -7,7 +7,7 @@ require("mason").setup()
 require("mason-lspconfig").setup {
     --
     ensure_installed = { 
-        "lua_ls", "texlab", "clangd", "jdtls","bashls","pyright","asm_lsp","hls","ruby_lsp"},
+        "lua_ls", "texlab", "clangd", "jdtls","bashls","pyright","asm_lsp","hls","solargraph"},
 }
 
 -- Servers Configuration
@@ -87,9 +87,12 @@ lsp.bashls.setup({
     }
 })
 
-lsp.ruby_lsp.setup({
+lsp.solargraph.setup({
     on_attach = on_attach,
-    capabilities = capabilities
+    capabilities = capabilities,
+    settings = {
+        useBundler = true
+    }
 })
 
 lsp.lua_ls.setup{

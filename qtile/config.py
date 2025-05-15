@@ -11,8 +11,8 @@ terminal = "kitty"
 
 @hook.subscribe.startup
 def set_basic_configuration():
-    subprocess.run(['setxkbmap', 'latam'])
-    subprocess.run(['sct','2700'])
+    #subprocess.run(['setxkbmap', 'latam'])
+    subprocess.run(['sct','3000'])
     subprocess.run(['picom','--daemon'])
 
 keys = [
@@ -81,7 +81,7 @@ keys = [
     Key([mod], "b", lazy.spawn("brave"), 
         desc="Launch brave"),
 
-    Key([], "print", lazy.spawn("flameshot gui"), 
+    Key([mod], "s", lazy.spawn("flameshot gui"), 
         desc="Take Screenshot"),
 
 # Layout Managent
@@ -123,20 +123,28 @@ for vt in range(1, 8):
         )
     )
 
+layouts = [
+    layout.Max(),
+    layout.MonadTall(border_width=0, margin=3, ratio=.60),
+    layout.Columns(border_width=0, margin=3, ratio=0.65), # layout.MonadWide(),
+    # layout.Stack(num_stacks=2), layout.Bsp(), layout.Matrix(), layout.RatioTile(),
+    # layout.Tile(), layout.TreeTab(), layout.VerticalTile(), layout.Zoomy(),
+]
+
 
 #groups = [Group(i) for i in "123456789"]
 groups = []
 
 groups_names = ["1","2","3","4","0"]
 groups_labels = [" "," ","󰜈 ","󰙯 ",""]
-groups_layouts = ["max","monadtall","max","max","max"]
+groups_layouts = [[layout.Max(),layouts[2]],[layouts[1],layouts[2]],[layout.Max(),layouts[2]],[layout.Max()],[layout.Max(),layouts[2]]]
 
 for i in range(len(groups_names)):
     groups.append(
             Group(
                 name=groups_names[i],
                 label=groups_labels[i],
-                layout=groups_layouts[i],))
+                layouts=groups_layouts[i],))
 
 for i in groups:
     keys.extend(
@@ -150,13 +158,6 @@ for i in groups:
         ]
     )
 
-layouts = [
-    layout.Max(),
-    layout.MonadTall(border_width=0, margin=3, ratio=.65),
-    # layout.Columns(border_width=0, margin=1), # layout.MonadWide(),
-    # layout.Stack(num_stacks=2), layout.Bsp(), layout.Matrix(), layout.RatioTile(),
-    # layout.Tile(), layout.TreeTab(), layout.VerticalTile(), layout.Zoomy(),
-]
 
 widget_defaults = dict(
     font="HackNerdFont",
@@ -198,10 +199,16 @@ screens = [
                 widget.CPU(format='{load_percent}%  ',
                            foreground='ee6d85',
                            padding=10),
-                widget.ThermalSensor(format='{temp:.1f} 󰔄',
-                                     threshold=75,
+                widget.ThermalSensor(format=' {temp:.1f}/',
+                                     tag_sensor='Tctl',
+                                     threshold=70,
                                      foreground='95c561',
-                                     padding=10),
+                                     padding=1),
+                widget.ThermalSensor(format='{temp:.1f} 󰔄 ',
+                                     tag_sensor='junction',
+                                     threshold=90,
+                                     foreground='95c561',
+                                     padding=1),
                 widget.Memory(format='{MemUsed:.1f}Gb  ',
                               measure_mem='G',
                               foreground='d7a65f',
@@ -210,7 +217,7 @@ screens = [
                           format='{f}Gb  ',
                           foreground='7199ee',
                           padding=10),
-                widget.Battery(format='{percent:2.0%} 󰂏 '),
+                #widget.Battery(format='{percent:2.0%} 󰂏 '),
                 widget.Net(format="{down:.1f} {down_suffix}",
                            prefix="M"),
                 widget.Sep(linewidth=1,foreground='a485dd',size_percent=70),
