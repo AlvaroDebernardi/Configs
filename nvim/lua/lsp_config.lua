@@ -7,7 +7,7 @@ require("mason").setup()
 require("mason-lspconfig").setup {
     --
     ensure_installed = { 
-        "lua_ls", "texlab", "clangd", "jdtls","bashls","pyright","asm_lsp","hls","ruby_lsp"},
+        "lua_ls", "texlab", "clangd", "jdtls","bashls","pyright","asm_lsp","hls","solargraph"},
 }
 
 -- Servers Configuration
@@ -36,7 +36,9 @@ local on_attach = function(_, bufnr)
     vim.keymap.set('n', '<leader>em', vim.diagnostic.open_float, opts)
     vim.keymap.set('n', '<leader>ep', vim.diagnostic.goto_prev, opts)
     vim.keymap.set('n', '<leader>en', vim.diagnostic.goto_next, opts)
+
     vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, opts)
+    vim.keymap.set('n', '<leader>cf', vim.lsp.buf.format, opts)
 end
 
 local lsp = require('lspconfig')
@@ -87,7 +89,7 @@ lsp.bashls.setup({
     }
 })
 
-lsp.ruby_lsp.setup({
+lsp.solargraph.setup({
     on_attach = on_attach,
     capabilities = capabilities
 })
