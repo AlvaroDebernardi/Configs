@@ -17,7 +17,11 @@ alias ls='lsd'
 
 # Git
 alias g='git'
+alias ga='git add'
 alias gs='git status'
 alias gd='git diff'
 alias gc='git commit -m'
+alias gb='git branch'
 alias gsw='git switch'
+alias gps='git push'
+alias gpl='git pull'
