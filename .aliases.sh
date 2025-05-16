@@ -8,6 +8,7 @@ alias pdf='zathura'
 alias img='feh'
 alias mdb='mariadb -u root -p'
 alias nv='nvim'
+alias nmdw='nmcli device wifi'
 
 # Commands
 alias pd='picom --daemon'
