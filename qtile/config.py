@@ -11,7 +11,7 @@ terminal = "kitty"
 
 @hook.subscribe.startup
 def set_basic_configuration():
-    #subprocess.run(['setxkbmap', 'latam'])
+    subprocess.run(['setxkbmap', 'us', '-variant', 'intl'])
     subprocess.run(['sct','3000'])
     subprocess.run(['picom','--daemon'])
 
