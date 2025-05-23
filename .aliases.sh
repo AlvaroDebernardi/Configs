@@ -27,3 +27,6 @@ alias gc='git commit -m'
 alias gr='git restore'
 alias gps='git push'
 alias gpl='git pull'
+
+# Docker
+alias dc='docker compose'
