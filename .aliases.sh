@@ -13,6 +13,7 @@ alias nmdw='nmcli device wifi'
 # Commands
 alias pd='picom --daemon'
 alias t='tree'
+alias tl='tree -L'
 alias cat='bat'
 alias ls='lsd'
 
@@ -30,3 +31,7 @@ alias gpl='git pull'
 
 # Docker
 alias dc='docker compose'
+alias dcu='docker compose up'
+alias dcr='docker compose run'
+alias dce='docker compose exec'
+alias di='docker images -a'
