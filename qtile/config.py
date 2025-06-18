@@ -2,6 +2,7 @@ from libqtile import bar, layout, qtile, widget, hook
 from libqtile.config import Click, Drag, Group, Key, Match, Screen, ScratchPad, DropDown
 from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
+from datetime import datetime
 import subprocess
 
 mod = "mod4"
@@ -165,6 +166,9 @@ widget_defaults = dict(
 )
 extension_defaults = widget_defaults.copy()
 
+day_of_year = datetime.today().timetuple().tm_yday
+perc_of_year = (day_of_year/365)*100
+
 screens = [
     Screen(
         wallpaper = '~/.config/qtile/Wallpapers/samuray.jpg', 
@@ -202,7 +206,7 @@ screens = [
                                      threshold=75,
                                      foreground='95c561',
                                      padding=10),
-                widget.Memory(format='{MemUsed:.1f}Gb  ',
+                widget.Memory(format='{MemUsed:.2f}Gb  ',
                               measure_mem='G',
                               foreground='d7a65f',
                               padding=10),
@@ -215,7 +219,15 @@ screens = [
                            prefix="M"),
                 widget.Sep(linewidth=1,foreground='a485dd',size_percent=70),
                 widget.Clock(format=" %-d/%-m/%y"),
-                widget.TextBox(text=" ",fontsize=16),
+                widget.WidgetBox(
+                    widgets=[
+                        widget.TextBox(text = f"{perc_of_year:.2f}"+'%',fontsize = 14, foreground='d7a65f'),
+                    ],
+                    fontsize=16,
+                    text_closed=" ",
+                    text_open=" ",
+                    close_button_location='right',
+                ),
                 widget.Sep(linewidth=1,foreground='a485dd',size_percent=70),
                 widget.QuickExit(fontsize=18,default_text='   ',foreground='a485dd'),
             ],
