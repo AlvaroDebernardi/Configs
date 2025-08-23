@@ -1,3 +1,6 @@
+
+-------------- Markdown -----------
+
 _G.setKeymap = function(stringMap)
     local position = vim.api.nvim_win_get_cursor(0)
     local row,col = position[1], position[2]
@@ -42,3 +45,42 @@ vim.api.nvim_create_autocmd("FileType", { pattern = "markdown",
         })
     end,
 })
+
+-------------- Latex -------------
+
+_G.insertLatexDocument = function()
+    local lines = {
+        "\\documentclass{article}",
+        "\\usepackage[utf8]{inputenc}",
+        "\\usepackage{amsmath, amssymb, amsthm}",
+        "\\usepackage{graphicx}",
+        "\\usepackage{geometry}",
+        "\\geometry{margin=1in}",
+        "",
+        "\\title{Title Here}",
+        "\\author{Debernardi Alvaro}",
+        "\\date{\\today}",
+        "",
+        "\\begin{document}",
+        "",
+        "\\maketitle",
+        "",
+        "\\section{Introduction}",
+        "",
+        "\\end{document}"
+    }
+
+    vim.api.nvim_buf_set_lines(0, 0, -1, false, lines)
+end
+
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = { "tex", "plaintex" },
+    callback = function()
+        vim.api.nvim_buf_set_keymap(0, "n", "<leader>ss", "", {
+            noremap = true,
+            silent = true,
+            callback = function() _G.insertLatexDocument() end,
+        })
+    end,
+})
+

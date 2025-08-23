@@ -12,7 +12,8 @@ terminal = "kitty"
 @hook.subscribe.startup
 def set_basic_configuration():
     subprocess.run(['setxkbmap', 'us']) #, '-variant', 'intl'])
-    subprocess.run(['sct','3000'])
+    #subprocess.run(['sct','3000'])
+    subprocess.run(['redshift','-O','2600','-b','0.8:0.8'])
     subprocess.run(['picom','--daemon'])
 
 keys = [
@@ -168,7 +169,7 @@ extension_defaults = widget_defaults.copy()
 
 screens = [
     Screen(
-        wallpaper = '~/.config/qtile/Wallpapers/samuray.jpg', 
+        wallpaper = '~/.config/qtile/Wallpapers/animal-camping.jpg', 
         wallpaper_mode='fill',
         top=bar.Bar(
             [
@@ -185,7 +186,7 @@ screens = [
                                 this_current_screen_border='215578',),
                 widget.Sep(linewidth=1,foreground='a485dd',
                            padding=15, size_percent=70),
-                widget.CurrentLayoutIcon(padding=5,scale=0.58),
+                widget.CurrentLayout(mode='icon',padding=5,scale=0.58),
                 widget.Prompt(),
                 widget.Spacer(),
                 widget.Sep(linewidth=1,padding=15,foreground='a485dd',size_percent=70),
@@ -238,7 +239,7 @@ screens = [
         # x11_drag_polling_rate = 60,
     ),
     Screen(
-        wallpaper = '~/.config/qtile/Wallpapers/samuray.jpg', 
+        wallpaper = '~/.config/qtile/Wallpapers/blue_wednesday_the_great_escape.jpg', 
         wallpaper_mode='fill',
         top=bar.Bar(
             [
@@ -255,7 +256,7 @@ screens = [
                                 this_current_screen_border='215578',),
                 widget.Sep(linewidth=1,foreground='a485dd',
                            padding=15, size_percent=70),
-                widget.CurrentLayoutIcon(padding=5,scale=0.58),
+                widget.CurrentLayout(padding=5,scale=0.58),
                 widget.Prompt(),
                 widget.Spacer(),
                 widget.Sep(linewidth=1,padding=15,foreground='a485dd',size_percent=70),
