@@ -6,7 +6,7 @@ require("mason").setup()
 
 require("mason-lspconfig").setup {
     --
-    ensure_installed = { 
+    ensure_installed = {
         "lua_ls", "texlab", "clangd", "jdtls","bashls","pyright","asm_lsp","hls","solargraph"},
 }
 
@@ -36,13 +36,26 @@ local on_attach = function(_, bufnr)
     vim.keymap.set('n', '<leader>em', vim.diagnostic.open_float, opts)
     vim.keymap.set('n', '<leader>ep', vim.diagnostic.goto_prev, opts)
     vim.keymap.set('n', '<leader>en', vim.diagnostic.goto_next, opts)
-
     vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, opts)
-    vim.keymap.set('n', '<leader>cf', vim.lsp.buf.format, opts)
 end
 
 local lsp = require('lspconfig')
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
+
+
+local root_markers = { "gradlew", "mvnw", ".git", "build.gradle", "pom.xml" }
+local root_dir = require("jdtls.setup").find_root(root_markers)
+local workspace_dir = vim.fn.stdpath("data") .. "/jdtls-workspace/" .. vim.fn.fnamemodify(root_dir, ":p:h:t")
+
+require("jdtls").start_or_attach( {
+    cmd = {
+        "jdtls", -- mason installs this
+        "-data", workspace_dir,
+    },
+    root_dir = root_dir,
+    capabilities = capabilities,
+    on_attach = on_attach,
+})
 
 
 lsp.clangd.setup{
@@ -51,11 +64,6 @@ lsp.clangd.setup{
 }
 
 lsp.hls.setup{
-    on_attach = on_attach,
-    capabilities = capabilities
-}
-
-lsp.jdtls.setup{
     on_attach = on_attach,
     capabilities = capabilities
 }
@@ -91,7 +99,10 @@ lsp.bashls.setup({
 
 lsp.solargraph.setup({
     on_attach = on_attach,
-    capabilities = capabilities
+    capabilities = capabilities,
+    settings = {
+        useBundler = true
+    }
 })
 
 lsp.lua_ls.setup{
