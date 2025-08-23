@@ -42,22 +42,6 @@ end
 local lsp = require('lspconfig')
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
-
-local root_markers = { "gradlew", "mvnw", ".git", "build.gradle", "pom.xml" }
-local root_dir = require("jdtls.setup").find_root(root_markers)
-local workspace_dir = vim.fn.stdpath("data") .. "/jdtls-workspace/" .. vim.fn.fnamemodify(root_dir, ":p:h:t")
-
-require("jdtls").start_or_attach( {
-    cmd = {
-        "jdtls", -- mason installs this
-        "-data", workspace_dir,
-    },
-    root_dir = root_dir,
-    capabilities = capabilities,
-    on_attach = on_attach,
-})
-
-
 lsp.clangd.setup{
     on_attach = on_attach,
     capabilities = capabilities
