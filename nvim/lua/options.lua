@@ -20,7 +20,7 @@ vim.opt.incsearch = true
 vim.opt.scrolloff = 11
 
 vim.opt.colorcolumn = "80"
-vim.opt.linebreack = true
+vim.opt.linebreak = true
 
 vim.o.foldmethod = "expr"
 vim.o.foldexpr = "nvim_treesitter#foldexpr()"

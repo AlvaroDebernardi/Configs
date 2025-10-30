@@ -14,7 +14,8 @@ alias nmdw='nmcli device wifi'
 alias pd='picom --daemon'
 alias t='tree'
 alias tl='tree -L'
-alias cat='bat'
+alias bat='/bin/cat'
+alias cat='/bin/bat'
 alias ls='lsd'
 
 # Git
