@@ -8,6 +8,9 @@ date: '+%d %b %y'
 
 permission: octal
 
+sorting:
+  dir-grouping: first
+
 truncate-owner: 
   after: 3
   marker: ""
