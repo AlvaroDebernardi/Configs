@@ -39,38 +39,37 @@ local on_attach = function(_, bufnr)
     vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, opts)
 end
 
-local lsp = require('lspconfig')
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
-lsp.clangd.setup{
+vim.lsp.config('clangd',{
     on_attach = on_attach,
     capabilities = capabilities
-}
+})
 
-lsp.hls.setup{
+vim.lsp.config('hls',{
     on_attach = on_attach,
     capabilities = capabilities
-}
+})
 
-lsp.pyright.setup{
+vim.lsp.config('pyright',{
     on_attach = on_attach,
     capabilities = capabilities
-}
+})
 
-lsp.texlab.setup{
+vim.lsp.config('texlab',{
     on_attach = on_attach,
     capabilities = capabilities
-}
+})
 
-lsp.asm_lsp.setup{
+vim.lsp.config('asm_lsp',{
     on_attach = on_attach,
     capabilities = capabilities,
     root_dir = function (fname)
         return vim.fn.getcwd()
     end,
-}
+})
 
-lsp.bashls.setup({
+vim.lsp.config('bashls',{
     on_attach = on_attach,
     capabilities = capabilities,
     root_dir = function (fname)
@@ -81,7 +80,7 @@ lsp.bashls.setup({
     }
 })
 
-lsp.solargraph.setup({
+vim.lsp.config('solargraph',{
     on_attach = on_attach,
     capabilities = capabilities,
     settings = {
@@ -89,7 +88,7 @@ lsp.solargraph.setup({
     }
 })
 
-lsp.lua_ls.setup{
+vim.lsp.config('lua_ls',{
     on_attach = on_attach,
     capabilities = capabilities,
     on_init = function(client)
@@ -121,4 +120,4 @@ lsp.lua_ls.setup{
   settings = {
     Lua = {}
   }
-}
+})
