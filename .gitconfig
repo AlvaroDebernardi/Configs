@@ -4,6 +4,7 @@
 [core]
 	editor = nvim
 [alias]
-    pl = log --graph --pretty=format:'%C(red)%H%n \t %C(green)%an %C(blue)%d%n\t%C(yellow)%s%C(reset)%n' --decorate --all
+    pl = log --graph --pretty=format:'%C(red)%H %C(cyan)%ad %C(blue)%d%n%C(green)%an:%C(yellow) %s%C(reset)\n' --date=format:'%H:%M %d/%m/%y' --decorate --all
+
 [init]
 	defaultBranch = main
