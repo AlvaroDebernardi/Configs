@@ -214,7 +214,7 @@ screens = [
                           format='{f}Gb  ',
                           foreground='7199ee',
                           padding=10),
-                widget.Battery(format='{percent:2.0%} 󰂏 '),
+                #widget.Battery(format='{percent:2.0%} 󰂏 '),
                 widget.Net(format="{down:.1f} {down_suffix}",
                            prefix="M"),
                 widget.Sep(linewidth=1,foreground='a485dd',size_percent=70),
